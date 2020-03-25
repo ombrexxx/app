@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<title>List Students</title>
+	
+	<!-- reference our style sheet -->
+
+	<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" >
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>SRM - Student Relationship Manager</h2>
+		</div>
+	</div>
+	
+	<div id="container">
+	
+		<div id="content">
+		
+			<!-- put the new button: Add Customer -->
+			<input type="button" value="Add Student"
+				   onclick="window.location.href='showFormForAdd'; return false;" 
+				   class="add-button"
+			/>
+		
+			<!--  add a search box -->
+            <form th:action="@{/student/search}" method="GET">
+                Search customer: <input type="text" name="theSearchName" />
+                
+                <input type="submit" value="Search" class="add-button" />
+            </form>
+		
+		
+			<!--  add our html table here -->
+		
+			<table>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+				</tr>
+				
+				<!-- loop over and print our students -->
+				<tr th:each="tempStudent : ${students}">
+				
+					
+						<td th:text="${tempStudent.firstName}" />
+						<td th:text="${tempStudent.lastName}" />
+						<td th:text="${tempStudent.email}" />
+						
+						
+						<td>
+							<!-- display the info link -->
+							<a th:href="@{/student/showInfo/(studentId=${tempStudent.id})}">View info</a>
+							
+						</td>
+					
+				
+				</tr>
+						
+			</table>
+				
+		</div>
+	
+	</div>
+	
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
